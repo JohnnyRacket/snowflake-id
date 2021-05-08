@@ -1,16 +1,31 @@
-FROM node:alpine
-# Create Directory for the Container
-WORKDIR /usr/src/app
-# Only copy the package.json file to work directory
-COPY package.json .
-# Install all Packages
+# Install dependencies only when needed
+FROM node:alpine AS deps
+WORKDIR /app
+COPY package.json ./
 RUN npm install
-# Copy all other source code to work directory
-ADD . /usr/src/app
-# Install and build typescript
-RUN npm install -g typescript
-RUN tsc
-# Start
-WORKDIR /usr/src/app/dist
+
+# Rebuild the source code only when needed
+FROM node:alpine AS builder
+WORKDIR /app
+COPY . .
+COPY --from=deps /app/node_modules ./node_modules
+RUN npx tsc
+
+# Production image, copy all the files and run
+FROM node:alpine AS runner
+RUN apk --no-cache add curl
+WORKDIR /app
+ENV NODE_ENV production
+
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/package.json ./package.json
+COPY --from=builder /app/dist ./dist
+
+RUN addgroup -g 1001 -S nodejs
+RUN adduser -S snowflake -u 1001
+RUN chown -R snowflake:nodejs /app/dist
+USER snowflake
+WORKDIR /app/dist
 EXPOSE 3000
-CMD [ "node", "server.js" ]
+
+CMD ["node", "server.js"]
