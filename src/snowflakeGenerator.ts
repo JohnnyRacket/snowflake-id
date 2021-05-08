@@ -1,6 +1,7 @@
 function* generateSnowflake() {
   let seq = 0;
-  let machine = process.env.MACHINE_ID || Math.round(Math.random() * 1023)
+  // get machine id from env or generate random 10 bit int
+  let machine = process.env.MACHINE_ID || Math.floor(Math.random() * 1024)
   console.log(`MACHINE_ID = ${machine}`);
   let id = Buffer.alloc(8);
   while (true) {
