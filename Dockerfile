@@ -12,5 +12,5 @@ RUN npm install -g typescript
 RUN tsc
 # Start
 WORKDIR /usr/src/app/dist
-CMD [ "node", "server.js" ]
 EXPOSE 3000
+CMD [ "node", "server.js" ]
