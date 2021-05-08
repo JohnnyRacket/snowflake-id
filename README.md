@@ -5,7 +5,7 @@
 GET `/generate`: generates a new 64 bit uint snowflake id using epoch time, a random or assigned machine id, and a sequential increment.
 
 ## Benchmarked 
-Autocannon results running locally on a an 2015 mbp
+Autocannon results running locally on a 2015 mbp
 
 ```
 Running 10s test @ http://localhost:3000/generate
@@ -29,4 +29,4 @@ Req/Bytes counts sampled once per second.
 122k requests in 11.01s, 22.3 MB read
 ```
 
-What do these mean? When testing serving back only the string 'hello world!' the avg Req/Sec was `11464` meaning this it is only around 3% slower to generate snowflake ids and serve them than to serve static text. Essentially http framework will be the main bottleneck in serving ids. This is why fastify was chosen, as it seems to have the best throughput for a js http library.
+What do these mean? When testing serving back only the string 'hello world!' the avg Req/Sec was `11464` meaning this it is only around 3% slower to generate snowflake ids and serve them than to serve static text. Essentially the http framework will be the main bottleneck in serving ids. This is why fastify was chosen, as it seems to have the best throughput for a js http library.
