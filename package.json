@@ -1,5 +1,5 @@
 {
-  "name": "snowflake-ids",
+  "name": "snowflake-id",
   "version": "0.1.1",
   "description": "TypeScript service to generate snowflake ids.",
   "main": "dist/index.js",
