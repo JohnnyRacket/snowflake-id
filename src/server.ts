@@ -3,7 +3,7 @@ import snowflakeGenerator from './snowflakeGenerator';
 
 const app = fastify();
 
-app.get('/generate', async (req, res) => {
+app.get('/api/uint64', async (req, res) => {
     const id = snowflakeGenerator.next().value;
     return id;
 });
