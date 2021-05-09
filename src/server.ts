@@ -13,7 +13,8 @@ const start = async () => {
     try {
         const PORT = process.env.PORT || 3000;
         await app.listen(PORT, '0.0.0.0');
-        console.log(`Now listening on PORT ${PORT}`)
+        console.log('HEALTHY')
+        console.log(`PORT = ${PORT}`)
     } catch (err) {
         app.log.error(err);
         process.exit(1);
