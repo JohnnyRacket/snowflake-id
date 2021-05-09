@@ -4,17 +4,8 @@ import snowflakeGenerator from './snowflakeGenerator';
 const app = fastify();
 
 app.get('/generate', async (req, res) => {
-    //const id = snowflakeGenerator.next().value;
-    let list = [];
-        for(let i = 0; i < 5000; i++){
-            let value = String(snowflakeGenerator.next().value);
-            list.push(BigInt(value));
-        }
-        let sortedList = [...list];
-        sortedList.sort();
-        let obj = {list: list.toString(), sortedList: sortedList.toString()};
-
-    return obj;
+    const id = snowflakeGenerator.next().value;
+    return id;
 });
 
 // Run the server
