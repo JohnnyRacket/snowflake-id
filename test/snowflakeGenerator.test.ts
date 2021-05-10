@@ -38,4 +38,16 @@ describe('Correctly Generates IDs', () => {
         expect(sameSize).toBeTruthy();
     });
 
+    test('Ids throw an error if they generate >4096 in 1 millisecond', async () => {
+        //lock down time to test an extremely fast computation time
+        const timestamp = require('jest-mock-now')(new Date('2017-06-22'));
+        let list = [];
+        for(let i = 0; i < 4096; i++){
+            let value = String(generator.next().value);
+            list.push(BigInt.asUintN(64,BigInt(value) >> BigInt(22)));
+        }
+
+        expect(generator.next().value).toEqual(Error('Failed to generate snowflake id.'));
+    });
+
 });
