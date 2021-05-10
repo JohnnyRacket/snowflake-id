@@ -3,8 +3,14 @@ import snowflakeGenerator from './snowflakeGenerator';
 
 const app = fastify();
 
+// get machine id from env or generate random 10 bit int
+let machine = parseInt(process.env.MACHINE_ID) || Math.floor(Math.random() * 1024);
+console.log(`MACHINE_ID = ${machine}`);
+let generator = snowflakeGenerator(machine);
+
+// endpoint for vending ids
 app.get('/api/uint64', async (req, res) => {
-    const id = snowflakeGenerator.next().value;
+    const id = generator.next().value;
     return id;
 });
 

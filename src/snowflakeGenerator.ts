@@ -1,8 +1,7 @@
-function* generateSnowflake() {
+function* snowflakeGenerator(machineId: number) {
   let seq = 0;
-  // get machine id from env or generate random 10 bit int
-  let machine = process.env.MACHINE_ID || Math.floor(Math.random() * 1024)
-  console.log(`MACHINE_ID = ${machine}`);
+  // get machine id: 10 bit int to enable distributed keys being unique
+  let machine = machineId;
   // allocate a 64 bit (8 byte) buffer
   let id = Buffer.alloc(8);
   let lastTime = Date.now();
@@ -31,6 +30,6 @@ function* generateSnowflake() {
   }
 }
 
-const snowflakeGenerator = generateSnowflake();
+const generator = (machineId: number) => snowflakeGenerator(machineId);
 
-export default snowflakeGenerator;
+export default generator;
