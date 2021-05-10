@@ -1,6 +1,6 @@
 {
-  "name": "snowflake-id",
-  "version": "0.1.1",
+  "name": "snowflake-id-js",
+  "version": "1.0.0",
   "description": "TypeScript service to generate snowflake ids.",
   "main": "dist/index.js",
   "scripts": {
@@ -10,7 +10,8 @@
     "watch-ts": "tsc -w"
   },
   "keywords": [
-    "snowflake"
+    "snowflake",
+    "id"
   ],
   "author": "John Harrison",
   "license": "MIT",

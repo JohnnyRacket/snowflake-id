@@ -2,7 +2,38 @@
 
 #### A fast open-source Typescript 64bit uint snowflake id generator service.
 
-GET `/api/uint64`: generates a new 64 bit uint snowflake id using epoch time, a random or assigned machine id, and a sequential increment.
+
+## As a Service
+
+`docker pull firassasin/snowflake-id`
+
+### Config
+
+| ENV | default |
+| --- | ----------- |
+| PORT | 3000 |
+| MACHINE_ID | 0-1023 randomly assigned |
+
+### Endpoints
+
+| url | description |
+| --- | ----------- |
+| /api/uint64 | generates a new 64 bit uint snowflake id using epoch time, a random or assigned machine id, and a sequential increment. |
+
+## As a Library
+
+Install `npm i snowflake-id-js`
+
+Usage
+
+```
+import {snowflakeGenerator} from 'snowflake-id-js';
+
+const generator = snowflakeGenerator(512);
+
+let id = generator.next().value;
+```
+
 
 ## Benchmarked 
 Autocannon results running locally on an AMD 3700x
