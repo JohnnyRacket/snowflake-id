@@ -1,6 +1,6 @@
 {
   "name": "snowflake-id-js",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "TypeScript service to generate snowflake ids.",
   "main": "dist/index.js",
   "scripts": {
