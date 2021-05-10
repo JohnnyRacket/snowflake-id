@@ -17,9 +17,10 @@ RUN apk --no-cache add curl
 WORKDIR /app
 ENV NODE_ENV production
 
-COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/package.json ./package.json
 COPY --from=builder /app/dist ./dist
+WORKDIR /app
+RUN npm install --production
 
 RUN addgroup -g 1001 -S nodejs
 RUN adduser -S snowflake -u 1001
